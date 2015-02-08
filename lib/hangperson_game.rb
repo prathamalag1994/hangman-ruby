@@ -35,38 +35,43 @@ class HangpersonGame
   end
 
   def guess(letter)
-  	if letter == nil
+    begin
+    	if letter == nil
+        @mess = "a"
+        raise ArgumentError, 'Invalid guess.'
+        return false
+    	end
+    	if letter == ''
+        @mess = "a"
+        raise ArgumentError, 'Invalid guess.'
+        return false
+    	end
+    	if not letter.match(/^[[:alpha:]]$/)
+        @mess = "a"
+        raise ArgumentError, 'Invalid guess.'
+        return false
+    	end
+      @guess = letter.to_s[0].downcase
+    	if @guesses.include? @guess or @wrong_guesses.include? @guess
+        @mess = "b"
+        return false
+      else
+      	if @word.include? @guess
+            x = 0;
+            @word.each_char { |d|
+            if d == @guess
+              word_with_guesses[x] = d
+            end
+            x = x + 1
+            }
+        		@guesses = @guesses + @guess
+        	else
+        		@wrong_guesses = @wrong_guesses + @guess
+        	end
+      end
+    rescue
       @mess = "a"
-      #raise ArgumentError, 'Invalid guess.'
-      return false
-  	end
-  	if letter == ''
-      @mess = "a"
-      #raise ArgumentError, 'Invalid guess.'
-      return false
-  	end
-  	if not letter.match(/^[[:alpha:]]$/)
-      @mess = "a"
-      #raise ArgumentError, 'Invalid guess.'
-      return false
-  	end
-    @guess = letter.to_s[0].downcase
-  	if @guesses.include? @guess or @wrong_guesses.include? @guess
-      @mess = "b"
-      return false
-    else
-    	if @word.include? @guess
-          x = 0;
-          @word.each_char { |d|
-          if d == @guess
-            word_with_guesses[x] = d
-          end
-          x = x + 1
-          }
-      		@guesses = @guesses + @guess
-      	else
-      		@wrong_guesses = @wrong_guesses + @guess
-      	end
+      raise ArgumentError
     end
   end 
 
