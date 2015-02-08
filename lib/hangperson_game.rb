@@ -37,17 +37,17 @@ class HangpersonGame
   def guess(letter)
   	if letter == nil
       @mess = "a"
-      raise ArgumentError, 'Invalid guess.'
+      #raise ArgumentError, 'Invalid guess.'
       return false
   	end
   	if letter == ''
       @mess = "a"
-      raise ArgumentError, 'Invalid guess.'
+      #raise ArgumentError, 'Invalid guess.'
       return false
   	end
   	if not letter.match(/^[[:alpha:]]$/)
       @mess = "a"
-      raise ArgumentError, 'Invalid guess.'
+      #raise ArgumentError, 'Invalid guess.'
       return false
   	end
     @guess = letter.to_s[0].downcase
