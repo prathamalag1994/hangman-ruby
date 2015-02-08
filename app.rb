@@ -46,7 +46,7 @@ class HangpersonApp < Sinatra::Base
       flash[:message] = 'You have already used that letter.'
     end
     @game.mess = ''
-    redirect '/show'
+    redirect '/show' 
   end
   
   # Everytime a guess is made, we should eventually end up at this route.
